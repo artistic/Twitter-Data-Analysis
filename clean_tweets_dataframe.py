@@ -1,3 +1,6 @@
+import json
+import pandas as pd
+from textblob import TextBlob
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -11,6 +14,10 @@ class Clean_Tweets:
         remove rows that has column names. This error originated from
         the data collection stage.  
         """
+
+        data = zip(created_at, source, text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, follower_count, friends_count, sensitivity, hashtags, mentions, location)
+        df = pd.DataFrame(data=data, columns=columns)
+
         unwanted_rows = df[df['retweet_count'] == 'retweet_count' ].index
         df.drop(unwanted_rows , inplace=True)
         df = df[df['polarity'] != 'polarity']
@@ -20,14 +27,20 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-    
+        drop_duplicate = df[df['retweet_count'] == 'retweet_count' ].index
+        df.drop(drop_duplicate , inplace=True)
+        df = df[df['polarity'] != 'polarity']
         
         return df
+      
+        
+    #     return df
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
         """
         convert column to datetime
         """
-        
+
+      
         df = df[df['created_at'] >= '2020-12-31' ]
         
         return df
@@ -37,16 +50,18 @@ class Clean_Tweets:
         convert columns like polarity, subjectivity, retweet_count
         favorite_count etc to numbers
         """
-        df['polarity'] = pd
+        df['polarity'] = int(pd.DataFrame)
+        df['subjectivity'] = int(pd.DataFrame)
+        df['retweet_count'] = int(pd.DataFrame)
+        df['favorite_count'] = int(pd.DataFrame)
+    
         
-
         return df
     
     def remove_non_english_tweets(self, df:pd.DataFrame)->pd.DataFrame:
         """
         remove non english tweets from lang
         """
+        df = pd.DataFrame
         
-        df = 
-        
-        return df
+    #     return df
